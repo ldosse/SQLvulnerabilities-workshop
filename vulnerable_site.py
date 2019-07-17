@@ -3,6 +3,8 @@ from flask import Flask
 #Example code that I will use to develop the functionality
 import sqlite3 #This module is currently not included in reqs.txt
 
+#NAna Just created a solution that really works. We need to publish this!!!
+
 vuln_app = Flask(__name__)
 
 
