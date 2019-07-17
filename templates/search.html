@@ -1,1 +1,23 @@
 # Product Search form
+{% extends 'base.html' %}
+{% block body %}
+    <form>
+    <label for="search">Search</label>
+    <input type="text" id="search">
+    <input type="submit" value="Search">
+    </form>
+    <div id="productsList">
+    <table>
+        <tbody>
+        {% for prod in productList %}
+        <tr>
+            <td>{{ prod['name'] }}</td>
+            <td>{{ prod['description'] }}</td>
+            <td>{{ prod['price'] }}</td>
+            <td><a href="#">Add to Cart</a> </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
