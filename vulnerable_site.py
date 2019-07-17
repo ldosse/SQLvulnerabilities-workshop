@@ -1,9 +1,8 @@
-#Get the Flask app
-from flask import Flask
+	#Get the Flask app
+from flask import Flask, request, render_template
 #Example code that I will use to develop the functionality
 import sqlite3 #This module is currently not included in reqs.txt
 
-#NAna Just created a solution that really works. We need to publish this!!!
 
 vuln_app = Flask(__name__)
 
@@ -22,7 +21,7 @@ db = 'vuln_shop.db'
 #     db=db
 # )
 
-conn = sqlite3.Connect(db)
+conn = sqlite3.connect(db)
 cur = conn.cursor()
 
 
@@ -60,7 +59,7 @@ conn.commit()
 
 #Form that allows you to search and see prices of things
 #/shop
-@app.route('/',methods=['GET'],['POST'])
+@vuln_app.route('/',methods=['GET','POST'])
 def shop():
 	if request.method == 'GET':
 		return render_template('search.html',productList=[])
@@ -71,6 +70,8 @@ def shop():
 
 		cur.execute("""SELECT 'name','description','price' FROM ? WHERE 'name' LIKE *TODO*""" )
 
+		dummy_prod = {'name':'Soap','description':'For showering.','price':123}
+		return render_template('search.html',productList=[])
 
 
 
@@ -80,7 +81,7 @@ def shop():
 
 
 #/login
-@app.route('/login',methods= ['GET','POST'])
+@vuln_app.route('/login',methods= ['GET','POST'])
 def login():
 	if request.method == 'POST':
 		res = authenticate(username,password)
@@ -106,3 +107,5 @@ def login():
 		'''Show the login form (for a get request)'''
 		return render_template('login.html', message='')
 
+if __name__ == '__main__':
+	vuln_app.run(debug = True)
