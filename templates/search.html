@@ -11,9 +11,8 @@
         <tbody>
         {% for prod in productList %}
         <tr>
-            <td>{{ prod['name'] }}</td>
-            <td>{{ prod['description'] }}</td>
-            <td>{{ prod['price'] }}</td>
+            <td>{{ prod[0] }}</td>
+            <td>{{ prod[1] }}</td>
             <td><a href="#">Add to Cart</a> </td>
         </tr>
         {% endfor %}
