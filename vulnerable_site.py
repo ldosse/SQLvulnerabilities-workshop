@@ -1,11 +1,16 @@
 	#Get the Flask app
 from flask import Flask, request, render_template
+from hashlib import md5
 import MySQLdb
 import os
 
 vuln_app = Flask(__name__)
-def hash(wrd):
-	return wrd
+def hash(raw_passwrd):
+	return md5(raw_passwrd.encode('utf-8')).hexdigest()
+
+def check_hash(str_to_check, pw_hash):
+	str_hash = hash(str_to_check)
+	return (str_hash == pw_hash)
 
 host = 'localhost'
 user = os.environ['SQL_USER']
@@ -29,20 +34,18 @@ isAuthenticated = False
 # Example of how to insert new values:
 #conn.query("""INSERT INTO mytable VALUES ('foo3', 'bar2')""")
 def authenticate(user, passwd,conn=conn):
-	passwd = hash(passwd)
-	cur.execute("SELECT username,password FROM users WHERE username=\'{}\' AND password=\'{}\'".format(user,passwd))
-	res = cur.fetchone()
-
+	res=cur.execute("SELECT username,password FROM users WHERE username=\'{}\';".format(user))
+	#res = cur.fetchone()
 	result = {'ValidUser':False, 'ValidPassword':False}
-	if somethingTODO:
-		result['ValidUser'] = True
-	if something_elseTODO:
-		result['ValidPassword'] = True
+	if res:
+		result['ValidUser'] = (res[0][0] == user)
+		result['ValidPassword'] = check_hash(res[0][1], password)
+
+	conn.commit()
 
 	return result
 
 
-conn.commit()
 
 # # Example of how to fetch table data:
 # conn.query("""SELECT * FROM mytable""")
@@ -91,7 +94,7 @@ def login():
 		password = request.form.get('password')
 		if not username or not password:
 			return render_template('login.html', message='Please enter both Username and password')
-		res = authenticate(username,password)
+		result = authenticate(username,password)
 		msg = ''
 		if res['ValidUser']:
 			msg+= 'Valid Username'
