@@ -112,10 +112,12 @@ def login():
         '''Show the login form (for a get request)'''
         return render_template('login.html', message='')
 
-#/buy
+
+# /buy
 @vuln_app.route('/buy', methods=['GET'])
 def buy():
-	return render_template('success.html')
+    return render_template('success.html')
+
 
 if __name__ == '__main__':
     vuln_app.run(debug=False, host='0.0.0.0')
