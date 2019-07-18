@@ -61,17 +61,28 @@ def authenticate(user, passwd, conn=conn):
 
 # Form that allows you to search and see prices of things
 # /shop
-@vuln_app.route('/', methods=['GET', 'POST'])
+# @vuln_app.route('/', methods=['GET', 'POST'])
+# def shop():
+#     if request.method == 'GET':
+#         cur.execute("SELECT name, unitprice FROM products;")
+#         product_list = list(cur)
+#         return render_template('search.html', productList=product_list)
+#
+#     else:
+#
+#         search_string = "\'"+request.form['search']+"\'"
+#         print(search_string)
+#         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
+#         product_list = list(cur)
+#         return render_template('search.html', productList=product_list)@vuln_app.route('/', methods=['GET', 'POST'])
 def shop():
-    if request.method == 'GET':
+    search_string = "\'" + request.form['search'] + "\'"
+    if search_string == '':
         cur.execute("SELECT name, unitprice FROM products;")
         product_list = list(cur)
         return render_template('search.html', productList=product_list)
 
     else:
-
-        search_string = "\'"+request.form['search']+"\'"
-        print(search_string)
         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         product_list = list(cur)
         return render_template('search.html', productList=product_list)
