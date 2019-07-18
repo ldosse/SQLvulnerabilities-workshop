@@ -80,7 +80,7 @@ def shop():
         search_string = "\'" + request.form.get('search') + "\'" if (type(request.form.get('search')) == str) else "\'bag\'"
         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         product_list = list(cur)
-        return render_template('search.html', productList=product_list)@vuln_app.route('/', methods=['GET', 'POST'])
+        return render_template('search.html', productList=product_list)
 
 
 # Table that allows you to set prices of things (Should also have a message to display for hints)
