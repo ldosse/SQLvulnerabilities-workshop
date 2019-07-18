@@ -1,10 +1,10 @@
 import requests
 
-index_url =  'http://localhost/'
+index_url =  'http://localhost:5000/'
 index_data = dict()
 index_data['search'] = 'jea'
 
-login_url = 'http://localhost/login'
+login_url = 'http://localhost:5000/login'
 login_data= {}
 login_data['username']= 'testuser'
 login_data['password']= 'testpassword'

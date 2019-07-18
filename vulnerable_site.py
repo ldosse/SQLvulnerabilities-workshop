@@ -30,7 +30,7 @@ isAuthenticated = False
 #conn.query("""INSERT INTO mytable VALUES ('foo3', 'bar2')""")
 def authenticate(user, passwd,conn=conn):
 	passwd = hash(passwd)
-	cur.execute("SELECT username,password FROM users WHERE username=\'{}}\' AND password=\'{}}\'".format(user,passwd))
+	cur.execute("SELECT username,password FROM users WHERE username=\'{}\' AND password=\'{}\'".format(user,passwd))
 	res = cur.fetchone()
 
 	result = {'ValidUser':False, 'ValidPassword':False}
