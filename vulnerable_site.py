@@ -96,17 +96,17 @@ def login():
 			return render_template('login.html', message='Please enter both Username and password')
 		result = authenticate(username,password)
 		msg = ''
-		if res['ValidUser']:
+		if result['ValidUser']:
 			msg+= 'Valid Username'
 		else:
 			msg+= 'Invalid Username'
 
-		if res['ValidPassword']:
+		if result['ValidPassword']:
 			msg+= ' and Valid Password'
 		else:
 			msg+= ' and Invalid Password'
 
-		if not (res['ValidUser'] and res['ValidPassword']):
+		if not (result['ValidUser'] and result['ValidPassword']):
 			return render_template('login.html', message=msg)
 
 		return url_for(success)
