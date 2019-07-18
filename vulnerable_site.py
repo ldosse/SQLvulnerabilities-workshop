@@ -1,27 +1,25 @@
 	#Get the Flask app
 from flask import Flask, request, render_template
-#Example code that I will use to develop the functionality
-import sqlite3 #This module is currently not included in reqs.txt
-
+import MySQLdb
+import os
 
 vuln_app = Flask(__name__)
 
 
-# host = '127.0.0.1'
-# user = 'myuser'
-# password = 'secret'
-# port = 3306
-db = 'vuln_shop.db'
+host = 127.0.0.1
+user = os.environ['SQL_USER']
+password = os.environ['SQL_PASS']
+port = os.environ['SQL_PORT']
+db = os.environ['vuln_db']
 
-# conn = sqlite3.Connect(
-#     host=host,
-#     user=user,
-#     passwd=password,
-#     port=port,
-#     db=db
-# )
+conn = MySQLdb.Connect(
+    host=host,
+    user=user,
+    passwd=password,
+    port=port,
+    db=db
+)
 
-conn = sqlite3.connect(db)
 cur = conn.cursor()
 
 
