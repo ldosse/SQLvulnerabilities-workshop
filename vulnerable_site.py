@@ -106,4 +106,4 @@ def login():
 		return render_template('login.html', message='')
 
 if __name__ == '__main__':
-	vuln_app.run(debug = True)
+	vuln_app.run(debug = False)
