@@ -70,9 +70,9 @@ def shop():
 
     else:
 
-        search_string = request.form.get('search')
+        search_string = "\'"+request.form.get('search')+"\'"
         print(search_string)
-        cur.execute("SELECT name,unitprice FROM products WHERE name LIKE \'{}\';".format(search_string))
+        cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         product_list = list(cur)
         return render_template('search.html', productList=product_list)
 
