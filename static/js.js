@@ -1,3 +1,3 @@
 $('#submitButton').click(()=>{
-    $.post('/',$('#searchForm'))
+    $.p('/',$('#searchForm'))
 })

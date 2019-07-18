@@ -1,7 +1,7 @@
 # Product Search form
 {% extends 'base.html' %}
 {% block body %}
-    <form id="searchForm">
+    <form id="searchForm" method="get" action="/">
     <label for="search">Search</label>
     <input type="text" id="search">
     <input type="submit" value="Search" id="submitButton">
