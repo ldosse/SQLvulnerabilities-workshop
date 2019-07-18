@@ -1,10 +1,7 @@
 import MySQLdb
 import os
 
-vuln_app = Flask(__name__)
-
-
-host = 127.0.0.1
+host ='127.0.0.1'
 user = os.environ['SQL_USER']
 password = os.environ['SQL_PASS']
 port = os.environ['SQL_PORT']

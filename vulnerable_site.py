@@ -4,9 +4,10 @@ import MySQLdb
 import os
 
 vuln_app = Flask(__name__)
+def hash(wrd):
+	return wrd
 
-
-host = 127.0.0.1
+host = '127.0.0.1'
 user = os.environ['SQL_USER']
 password = os.environ['SQL_PASS']
 port = os.environ['SQL_PORT']
@@ -28,13 +29,14 @@ isAuthenticated = False
 # Example of how to insert new values:
 #conn.query("""INSERT INTO mytable VALUES ('foo3', 'bar2')""")
 def authenticate(user, passwd,conn=conn):
-	cur.execute("""SELECT ?,? FROM ? WHERE ?=\'user\' AND ?=\'passwd\'""")
+	passwd = hash(passwd)
+	cur.execute("SELECT username,password FROM users WHERE username=\'{}}\' AND password=\'{}}\'".format(user,passwd))
 	res = cur.fetchone()
 
 	result = {'ValidUser':False, 'ValidPassword':False}
-	if something:
+	if somethingTODO:
 		result['ValidUser'] = True
-	if something_else:
+	if something_elseTODO:
 		result['ValidPassword'] = True
 
 	return result
@@ -64,13 +66,13 @@ def shop():
 
 	else:
 
-		search_string = resuest.form.get('search')
+		search_string = "\'"+ request.form.get('search')+"\'"
 
 
-		prods = cur.execute("SELECT 'name','unitprice' FROM 'products' WHERE 'name' LIKE {}".format(search_string) )
+		productList = cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string) )
+		productList = list(productList)
 
-		dummy_prod = {'name':'Soap','description':'For showering.','price':123}
-		return render_template('search.html',productList=[])
+		return render_template('search.html',productList=productList)
 
 
 
