@@ -73,6 +73,8 @@ def shop():
         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         productList = list(cur)
 
+	cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string) )
+	productList = list(cur)
         return render_template('search.html', productList=productList)
 
 
