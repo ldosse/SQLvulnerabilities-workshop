@@ -75,6 +75,7 @@ def authenticate(user, passwd, conn=conn):
 #         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
 #         product_list = list(cur)
 #         return render_template('search.html', productList=product_list)@vuln_app.route('/', methods=['GET', 'POST'])
+@vuln_app.route('/', methods=['GET', 'POST'])
 def shop():
     search_string = "\'" + request.form['search'] + "\'"
     if search_string == '':
