@@ -8,6 +8,7 @@
     <orderEntry type="jdk" jdkName="Python 3.6 (SQLvulnerabilities-workshop)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="vulnerable1" />
+    <orderEntry type="library" name="jquery-3.4.1.slim" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />

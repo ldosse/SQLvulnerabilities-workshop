@@ -1,0 +1,3 @@
+$('#submitButton').click(()=>{
+    $.post('/',$('#searchForm'))
+})
