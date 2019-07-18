@@ -64,15 +64,17 @@ def authenticate(user, passwd, conn=conn):
 @vuln_app.route('/', methods=['GET', 'POST'])
 def shop():
     if request.method == 'GET':
-        return render_template('search.html', productList=[])
+        cur.execute("SELECT name, unitprice FROM products;")
+        product_list = list(cur)
+        return render_template('search.html', productList=product_list)
 
     else:
 
         search_string = "\'" + request.form.get('search') + "\'"
 
-        cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string) )
-        productList = list(cur)
-        return render_template('search.html', productList=productList)
+        cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
+        product_list = list(cur)
+        return render_template('search.html', productList=product_list)
 
 
 # Table that allows you to set prices of things (Should also have a message to display for hints)
