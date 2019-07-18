@@ -7,10 +7,10 @@ vuln_app = Flask(__name__)
 def hash(wrd):
 	return wrd
 
-host = '127.0.0.1'
+host = 'localhost'
 user = os.environ['SQL_USER']
 password = os.environ['SQL_PASS']
-port = os.environ['SQL_PORT']
+port = int(os.environ['SQL_PORT'])
 db = os.environ['vuln_db']
 
 conn = MySQLdb.Connect(
@@ -69,8 +69,8 @@ def shop():
 		search_string = "\'"+ request.form.get('search')+"\'"
 
 
-		productList = cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string) )
-		productList = list(productList)
+		cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string) )
+		productList = list(cur)
 
 		return render_template('search.html',productList=productList)
 

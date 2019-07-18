@@ -6,5 +6,5 @@ data = dict{}
 data['search'] = 'jea'
 
 
-resp = requests.get(url, params=None)
-resp = requests.post(url, data=data)
+resp1 = requests.get(url, params=None)
+resp2 = requests.post(url, data=data)
