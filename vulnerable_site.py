@@ -63,10 +63,11 @@ def shop():
 		return render_template('search.html',productList=[])
 
 	else:
-		#TODO: Ensure username and password are not empty first
+
+		search_string = resuest.form.get('search')
 
 
-		cur.execute("""SELECT 'name','description','price' FROM ? WHERE 'name' LIKE *TODO*""" )
+		prods = cur.execute("SELECT 'name','unitprice' FROM 'products' WHERE 'name' LIKE {}".format(search_string) )
 
 		dummy_prod = {'name':'Soap','description':'For showering.','price':123}
 		return render_template('search.html',productList=[])
@@ -82,6 +83,11 @@ def shop():
 @vuln_app.route('/login',methods= ['GET','POST'])
 def login():
 	if request.method == 'POST':
+		#TODO: Ensure username and password are not empty first
+		username = request.form.get('username')
+		password = request.form.get('password')
+		if not username or not password:
+			return render_template('login.html', message='Please enter both Username and password')
 		res = authenticate(username,password)
 		msg = ''
 		if res['ValidUser']:
@@ -106,4 +112,4 @@ def login():
 		return render_template('login.html', message='')
 
 if __name__ == '__main__':
-	vuln_app.run(debug = True)
+	vuln_app.run(debug = False, host='0.0.0.0')
