@@ -51,10 +51,11 @@ isAuthenticated = False
 def authenticate(user, passwd, conn=conn):
     res = cur.execute("SELECT username,password FROM users WHERE username=\'{}\';".format(user))
     # res = cur.fetchone()
+    res2 = list(cur)
     result = {'ValidUser': False, 'ValidPassword': False}
     if res:
-        result['ValidUser'] = (res[0][0] == user)
-        result['ValidPassword'] = check_hash(res[0][1], password)
+        result['ValidUser'] = (res2[0][0] == user)
+        result['ValidPassword'] = check_hash(res2[0][1], password)
 
     conn.commit()
 
@@ -79,7 +80,7 @@ def shop():
         return render_template('search.html', productList=[], form=form)
 
     else:
-        search_string = "\'" + form.search.data + "\'"
+        search_string = "\'%" + form.search.data + "%\'"
         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         productList = list(cur)
         return render_template('search.html', productList=productList, form=form)
