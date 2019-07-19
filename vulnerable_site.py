@@ -1,9 +1,13 @@
 # Get the Flask app
 from flask import Flask, request, render_template
+from wtforms import Form, StringField
 from hashlib import md5
 import MySQLdb
 import os
 
+
+class ShoppingForm(Form):
+    search = StringField('search')
 vuln_app = Flask(__name__)
 
 
@@ -70,18 +74,23 @@ def authenticate(user, passwd, conn=conn):
 #
 #     else:
 #
-#         search_string = "\'"+request.form['search']+"\'"
-#         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
-#         product_list = list(cur)
-#         return render_template('search.html', productList=product_list)@vuln_app.route('/', methods=['GET', 'POST'])
-@vuln_app.route('/', methods=['GET'])
+        # search_string = "\'"+request.form['search']+"\'"
+        # cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
+        # product_list = list(cur)
+        # return render_template('search.html', productList=product_list)@vuln_app.route('/', methods=['GET', 'POST'])
+@vuln_app.route('/', methods=['GET', 'POST'])
 def shop():
+    form = ShoppingForm
     if request.method == 'GET':
-        search_string = "\'" + request.data['search'] + "\'" if (type(request.form.get('search')) == str) else "\'bag\'"
+        search_string = "\'\'"
         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         product_list = list(cur)
-        return render_template('search.html', productList=product_list)
-
+        return render_template('search.html', productList=product_list, form=form)
+    else:
+        search_string = "\'" + form.search.data + "\'"
+        cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
+        product_list = list(cur)
+        return render_template('search.html', productList=product_list, form=form)
 
 # Table that allows you to set prices of things (Should also have a message to display for hints)
 # /admin
