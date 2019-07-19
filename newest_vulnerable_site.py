@@ -81,7 +81,7 @@ def shop():
 
 # Table that allows you to set prices of things (Should also have a message to display for hints)
 # /admin
-`
+
 
 # /login
 @vuln_app.route('/login', methods=['GET', 'POST'])
