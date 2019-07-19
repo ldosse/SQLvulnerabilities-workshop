@@ -69,7 +69,7 @@ def authenticate(user, passwd, conn=conn):
 # /shop
 @vuln_app.route('/', methods=['GET', 'POST'])
 def shop():
-    form = ShoppingForm
+    form = ShoppingForm(request.form)
     if request.method == 'GET':
         return render_template('search.html', productList=[], form=form)
 
