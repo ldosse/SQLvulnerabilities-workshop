@@ -59,30 +59,6 @@ def authenticate(user, passwd, conn=conn):
 
 # ---------------ROUTES----------------------
 
-<<<<<<< HEAD
-# Form that allows you to search and see prices of things
-# /shop
-# @vuln_app.route('/', methods=['GET', 'POST'])
-# def shop():
-#     if request.method == 'GET':
-#         cur.execute("SELECT name, unitprice FROM products;")
-#         product_list = list(cur)
-#         return render_template('search.html', productList=product_list)
-#
-#     else:
-#
-#         search_string = "\'"+request.form['search']+"\'"
-#         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
-#         product_list = list(cur)
-#         return render_template('search.html', productList=product_list)@vuln_app.route('/', methods=['GET', 'POST'])
-@vuln_app.route('/', methods=['GET'])
-def shop():
-    if request.method == 'GET':
-        search_string = "\'" + request.data['search'] + "\'" if (type(request.form.get('search')) == str) else "\'bag\'"
-        cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
-        product_list = list(cur)
-        return render_template('search.html', productList=product_list)
-=======
 #Form that allows you to search and see prices of things
 #/shop
 @vuln_app.route('/', methods=['GET', 'POST'])
@@ -90,12 +66,13 @@ def shop():
     if request.method == 'GET':
         #cur.execute("SELECT name, unitprice FROM products;")
         #product_list = list(cur)
-        return render_template('search.html', productList=product_list)
+        #print("using Get Request")
+        return render_template('search.html', productList=[])
 
     else:
->>>>>>> ca2fb1e1225af10f8ec332a33d9c37f6b26b65ed
 
         search_string = "\'%"+request.form['search']+"%\'"
+        print (search_string)
         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         product_list = list(cur)
         return render_template('search.html', productList=product_list)
@@ -107,39 +84,11 @@ def shop():
 #         product_list = list(cur)
 #         return render_template('search.html', productList=product_list)
 
-<<<<<<< HEAD
-# Table that allows you to set prices of things (Should also have a message to display for hints)
-# /admin
-
-=======
 
 # Table that allows you to set prices of things (Should also have a message to display for hints)
 # /admin
->>>>>>> ca2fb1e1225af10f8ec332a33d9c37f6b26b65ed
 
-# /login
-@vuln_app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        # TODO: Ensure username and password are not empty first
-        username = request.form.get('username')
-        password = request.form.get('password')
-        if not username or not password:
-            return render_template('login.html', message='Please enter both Username and password')
-        result = authenticate(username, password)
-        msg = ''
-        if result['ValidUser']:
-            msg += 'Valid Username'
-        else:
-            msg += 'Invalid Username'
 
-<<<<<<< HEAD
-        if result['ValidPassword']:
-            msg += ' and Valid Password'
-        else:
-            msg += ' and Invalid Password'
-
-=======
 # /login
 @vuln_app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -161,7 +110,6 @@ def login():
         else:
             msg += ' and Invalid Password'
 
->>>>>>> ca2fb1e1225af10f8ec332a33d9c37f6b26b65ed
         if not (result['ValidUser'] and result['ValidPassword']):
             return render_template('login.html', message=msg)
 

@@ -19,7 +19,15 @@ cur = conn.cursor()
 
 search_string = '%e%'
 
+<<<<<<< HEAD
 prods = cur.execute("SELECT 'name','unitprice' FROM 'products' WHERE 'name' LIKE {}".format(search_string))
+=======
+<<<<<<< HEAD
+prods = cur.execute("SELECT name,unitprice FROM products WHERE name LIKE \'{}\'".format(search_string) )
+=======
+prods = cur.execute("SELECT 'name','unitprice' FROM 'products' WHERE 'name' LIKE {}".format(search_string))
+>>>>>>> 6038b51eaf6cfe6ea499bd618cd5a997a0ff9be0
+>>>>>>> ca2fb1e1225af10f8ec332a33d9c37f6b26b65ed
 
 print(prod)
 
