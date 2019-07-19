@@ -1,10 +1,10 @@
 import MySQLdb
 import os
 
-host ='127.0.0.1'
+host = '127.0.0.1'
 user = os.environ['SQL_USER']
 password = os.environ['SQL_PASS']
-port = os.environ['SQL_PORT']
+port = int(os.environ['SQL_PORT'])
 db = os.environ['vuln_db']
 
 conn = MySQLdb.Connect(
@@ -19,10 +19,14 @@ cur = conn.cursor()
 
 search_string = '%e%'
 
+<<<<<<< HEAD
 prods = cur.execute("SELECT name,unitprice FROM products WHERE name LIKE \'{}\'".format(search_string) )
+=======
+prods = cur.execute("SELECT 'name','unitprice' FROM 'products' WHERE 'name' LIKE {}".format(search_string))
+>>>>>>> 6038b51eaf6cfe6ea499bd618cd5a997a0ff9be0
 
-print (prod)
+print(prod)
 
 for prod in cur:
-	print(prod[0])
-	print(prod[1])
+    print(prod[0])
+    print(prod[1])

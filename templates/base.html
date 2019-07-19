@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+{#        <script#}
+{#            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"#}
+{#            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="#}
+{#            crossorigin="anonymous"></script>#}
     <meta charset="UTF-8">
     <title>{% block title%} {% endblock %} </title>
 </head>
 <body>
 <header>
-<nav>
-    <ul>
-        <li>login</li>
-        <li>Products</li>
-    </ul>
-</nav>
+    <nav>
+        <ul>
+            <li><a href="/login">login</a></li>
+            <li><a href="/">products</a></li>
+        </ul>
+    </nav>
 </header>
 {% block body %}
 {% endblock %}
 <footer>
 
 </footer>
+{#<script src="../static/js.js"></script>#}
 </body>
 </html>

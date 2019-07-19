@@ -1,11 +1,11 @@
 # Product Search form
 {% extends 'base.html' %}
 {% block body %}
-    <form>
+    <form id="searchForm" method="get" action="/">
     <label for="search">Search</label>
     <input type="text" id="search">
-    <input type="submit" value="Search">
-    </form>
+    <input type="submit" value="Search" id="submitButton">
+    </form >
     <div id="productsList">
     <table>
         <tbody>
@@ -13,7 +13,7 @@
         <tr>
             <td>{{ prod[0] }}</td>
             <td>{{ prod[1] }}</td>
-            <td><a href="#">Add to Cart</a> </td>
+            <td><a href="/buy">Buy</a> </td>
         </tr>
         {% endfor %}
         </tbody>
