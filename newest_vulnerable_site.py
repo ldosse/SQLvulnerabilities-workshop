@@ -10,6 +10,11 @@ class ShoppingForm(Form):
     search = StringField('search')
 
 
+class LoginForm(Form):
+    username = StringField('username')
+    password = StringField('password')
+
+
 vuln_app = Flask(__name__)
 
 
@@ -87,12 +92,13 @@ def shop():
 # /login
 @vuln_app.route('/login', methods=['GET', 'POST'])
 def login():
+    form = LoginForm(request.form)
     if request.method == 'POST':
         # TODO: Ensure username and password are not empty first
-        username = request.form.get('username')
-        password = request.form.get('password')
+        username = form.username.data
+        password = form.password.data
         if not username or not password:
-            return render_template('login.html', message='Please enter both Username and password')
+            return render_template('login.html', message='Please enter both Username and password', form=form)
         result = authenticate(username, password)
         msg = ''
         if result['ValidUser']:
@@ -106,7 +112,7 @@ def login():
             msg += ' and Invalid Password'
 
         if not (result['ValidUser'] and result['ValidPassword']):
-            return render_template('login.html', message=msg)
+            return render_template('login.html', message=msg, form=form)
 
         return url_for(success)
 

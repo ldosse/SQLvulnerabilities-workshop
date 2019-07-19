@@ -2,11 +2,11 @@
 {% extends 'base.html' %}
 {% block body %}
 <p><b>{{ message }}</b></p>
-<form>
-<label for="username">Username</label>
-    <input id="username" type="text">
-    <label for="password">Password</label>
-    <input id="password" type="text">
+<form method="post">
+<dl>
+        {{ render_field(form.username) }}
+        {{ render_field(form.password) }}
+    </dl>
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
