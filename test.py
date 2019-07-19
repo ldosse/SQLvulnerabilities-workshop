@@ -19,7 +19,7 @@ cur = conn.cursor()
 
 search_string = '%e%'
 
-prods = cur.execute("SELECT 'name','unitprice' FROM 'products' WHERE 'name' LIKE {}".format(search_string) )
+prods = cur.execute("SELECT name,unitprice FROM products WHERE name LIKE \'{}\'".format(search_string) )
 
 print (prod)
 
