@@ -55,7 +55,7 @@ def authenticate(user, passwd, conn=conn):
     result = {'ValidUser': False, 'ValidPassword': False}
     if res:
         result['ValidUser'] = (res2[0][0] == user)
-        result['ValidPassword'] = check_hash(res2[0][1], password)
+        result['ValidPassword'] = check_hash(password,res2[0][1])
 
     conn.commit()
 
@@ -83,6 +83,7 @@ def shop():
         search_string = "\'%" + form.search.data + "%\'"
         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         productList = list(cur)
+	cur.commit()
         return render_template('search.html', productList=productList, form=form)
 
 
