@@ -1,9 +1,13 @@
 # Get the Flask app
 from flask import Flask, request, render_template
+from wtforms import Form, StringField
 from hashlib import md5
 import MySQLdb
 import os
 
+
+class ShoppingForm(Form):
+    search = StringField('search')
 vuln_app = Flask(__name__)
 
 
@@ -60,6 +64,7 @@ def authenticate(user, passwd, conn=conn):
 # ---------------ROUTES----------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Form that allows you to search and see prices of things
 # /shop
 # @vuln_app.route('/', methods=['GET', 'POST'])
@@ -83,16 +88,18 @@ def shop():
         product_list = list(cur)
         return render_template('search.html', productList=product_list)
 =======
+=======
+>>>>>>> 30b76ce8478930ab187c69d5bed11b963ba4f168
 #Form that allows you to search and see prices of things
 #/shop
 @vuln_app.route('/', methods=['GET', 'POST'])
 def shop():
+    form = ShoppingForm(request.form)
     if request.method == 'GET':
-        #cur.execute("SELECT name, unitprice FROM products;")
-        #product_list = list(cur)
-        return render_template('search.html', productList=product_list)
+        return render_template('search.html', productList=[],form=form)
 
     else:
+<<<<<<< HEAD
 >>>>>>> ca2fb1e1225af10f8ec332a33d9c37f6b26b65ed
 
         search_string = "\'%"+request.form['search']+"%\'"
@@ -140,6 +147,19 @@ def login():
             msg += ' and Invalid Password'
 
 =======
+=======
+        search_string = "\'%"+form.search.data+"%\'"
+        # search_string = "\'%"+request.form['search']+"%\'"
+        cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
+        product_list = list(cur)
+        return render_template('search.html', productList=product_list,form=form)
+
+
+# Table that allows you to set prices of things (Should also have a message to display for hints)
+# /admin
+
+
+>>>>>>> 30b76ce8478930ab187c69d5bed11b963ba4f168
 # /login
 @vuln_app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -161,7 +181,10 @@ def login():
         else:
             msg += ' and Invalid Password'
 
+<<<<<<< HEAD
 >>>>>>> ca2fb1e1225af10f8ec332a33d9c37f6b26b65ed
+=======
+>>>>>>> 30b76ce8478930ab187c69d5bed11b963ba4f168
         if not (result['ValidUser'] and result['ValidPassword']):
             return render_template('login.html', message=msg)
 

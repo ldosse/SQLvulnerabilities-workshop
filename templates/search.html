@@ -1,7 +1,11 @@
 # Product Search form
 {% extends 'base.html' %}
 {% block body %}
-    <form id="searchForm" method="get" action="/">
+    {% from "_formhelper.html" import render_field %}
+    <form method="post" >
+    <dl>
+        {{ render_field(form.search) }}
+    </dl>
     <label for="search">Search</label>
     <input type="text" id="search">
     <input type="submit" value="Search" id="submitButton">
