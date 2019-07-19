@@ -49,7 +49,7 @@ isAuthenticated = False
 # Example of how to insert new values:
 # conn.query("""INSERT INTO mytable VALUES ('foo3', 'bar2')""")
 def authenticate(user, passwd, conn=conn):
-    res = cur.execute("SELECT username,password FROM users WHERE username=\'{}\';".format(user))
+    res = cur.execute("SELECT username,password FROM users WHERE username=\"{}\";".format(user))
     # res = cur.fetchone()
     res2 = list(cur)
     result = {'ValidUser': False, 'ValidPassword': False}
