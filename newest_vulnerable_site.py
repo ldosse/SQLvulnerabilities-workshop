@@ -55,7 +55,7 @@ def authenticate(user, passwd, conn=conn):
     result = {'ValidUser': False, 'ValidPassword': False}
     if res:
         result['ValidUser'] = (res2[0][0] == user)
-        result['ValidPassword'] = check_hash(password,res2[0][1])
+        result['ValidPassword'] = (password == res2[0][1])
 
     conn.commit()
 
