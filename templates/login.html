@@ -3,6 +3,7 @@
 {% block body %}
 <p><b>{{ message }}</b></p>
 <form method="post">
+{% from "_formhelper.html" import render_field %}
 <dl>
         {{ render_field(form.username) }}
         {{ render_field(form.password) }}
