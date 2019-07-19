@@ -120,7 +120,7 @@ def login():
 
     else:
         '''Show the login form (for a get request)'''
-        return render_template('login.html', message='')
+        return render_template('login.html', message='', form=form)
 
 
 # /buy
