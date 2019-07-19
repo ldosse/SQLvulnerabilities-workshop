@@ -5,11 +5,12 @@ from wtforms import Form, StringField
 import MySQLdb
 import os
 
+
 class ShoppingForm(Form):
     search = StringField('search')
 
-vuln_app = Flask(__name__)
 
+vuln_app = Flask(__name__)
 
 
 def hash(raw_passwrd):
@@ -73,10 +74,10 @@ def shop():
         return render_template('search.html', productList=[], form=form)
 
     else:
-        search_string = "\'"+ form.search.data + "\'"
+        search_string = "\'" + form.search.data + "\'"
         cur.execute("SELECT name,unitprice FROM products WHERE name LIKE {};".format(search_string))
         productList = list(cur)
-        return render_template('search.html',productList=productList, form=form)
+        return render_template('search.html', productList=productList, form=form)
 
 
 # Table that allows you to set prices of things (Should also have a message to display for hints)
@@ -115,10 +116,12 @@ def login():
         '''Show the login form (for a get request)'''
         return render_template('login.html', message='')
 
-#/buy
+
+# /buy
 @vuln_app.route('/buy', methods=['GET'])
 def buy():
     return render_template('success.html')
 
+
 if __name__ == '__main__':
-    vuln_app.run(debug = False, host='0.0.0.0')
+    vuln_app.run(debug=False, host='0.0.0.0')
